@@ -1,0 +1,363 @@
+trigger AccDes on Opportunity (after insert, after update, after delete,after undelete) {
+        if (Trigger.isAfter && (Trigger.isInsert || Trigger.isUpdate)) {
+            AccountOpp.handleAfterInsertUpdate(Trigger.new);
+        }
+        if (Trigger.isAfter && Trigger.isDelete) {
+            AccountOpp.handleAfterDelete(Trigger.old);
+        }
+        if(Trigger.isAfter && Trigger.isUndelete)
+        {
+         AccountOpp.handleAfterUndelete(Trigger.new);
+        }
+    }
+
+Handler Class -
+
+public class AccountOpp {
+    public static void handleAfterInsertUpdate(List<Opportunity> newOpList) {
+        Set<Id> accIds = new Set<Id>();
+        for (Opportunity o : newOpList) {
+            if (o.Amount != null) {
+                accIds.add(o.AccountId);
+            }
+        }
+
+        if (!accIds.isEmpty()) {
+            List<Account> accList = [SELECT Id, Name, Description, 
+                                     (SELECT Id, Amount, Name 
+                                      FROM Opportunities 
+                                      ORDER BY Amount DESC 
+                                      LIMIT 1) 
+                                     FROM Account 
+                                     WHERE Id IN :accIds];
+
+            if (!accList.isEmpty()) {
+                for (Account a : accList) {
+                    if (!a.Opportunities.isEmpty()) {
+                        a.Description = a.Opportunities[0].Name;
+                    }
+                    else
+                    { 
+                       a.Description = null;
+                    }
+                }
+                update accList;
+            }
+        }
+    }
+
+    public static void handleAfterInsertUpdate(List<Opportunity> newOpList, List<Opportunity> oldOpList) {
+        handleAfterInsertUpdate(newOpList); // Reuse the same method for update
+    }
+    
+    public static void handleAfterDelete (List<Opportunity> oplist)
+    {
+        handleAfterInsertUpdate(oplist); // Reuse the same method for updat
+        
+    }
+    public static void handleAfterUndelete (List<Opportunity> oplist)
+    {
+      handleAfterInsertUpdate(oplist); // Reuse the same method for update
+    }
+}
+
+
+
+public class AccountUpdater {
+    public static void updateAccountDescriptions(Set<Id> accountIds) {
+        List<Account> accountsToUpdate = new List<Account>();
+
+        // Fetch Opportunities grouped by AccountId
+        Map<Id, Opportunity> highestOpportunities = new Map<Id, Opportunity>();
+        
+        for (Opportunity opp : [
+            SELECT Id, Name, AccountId 
+            FROM Opportunity 
+            WHERE AccountId IN :accountIds 
+            ORDER BY Name DESC
+        ]) {
+            if (!highestOpportunities.containsKey(opp.AccountId)) {
+                highestOpportunities.put(opp.AccountId, opp);
+            }
+        }
+
+        // Update the Account description with the highest Opportunity name
+        for (Id accountId : accountIds) {
+            if (highestOpportunities.containsKey(accountId)) {
+                Account acc = new Account(Id = accountId);
+                acc.Description = highestOpportunities.get(accountId).Name;
+                accountsToUpdate.add(acc);
+            }
+        }
+
+        if (!accountsToUpdate.isEmpty()) {
+            update accountsToUpdate;
+        }
+    }
+}
+
+----------------------------------
+public class CaseTriggerHandler {
+    public static void countNumberofClosedCase(List<Case> caseList){
+        Set<Id> accIds=new Set<Id>();
+        Map<Id,Integer> accCountMap=new Map<Id,Integer>();
+        if(!caseList.isEmpty()){
+            for(Case c:caseList){
+                if(c.AccountId!=null){
+                    accIds.add(c.AccountId);
+                }
+            }
+        }
+        if(!accIds.isEmpty()){
+            for(AggregateResult agg:[Select AccountId,count(id) countcase from case where AccountId In:accIds AND Status='Working' group by AccountId ]){
+                Id id=(Id) agg.get('AccountId');
+                Integer caseCount=(Integer) agg.get('countcase');
+                accCountMap.put(id,caseCount);
+            }
+        }
+        List<Account> accList=new List<Account>();
+        if(!accCountMap.isEmpty()){
+            for(Case c:caseList){
+                if(accCountMap.containsKey(c.AccountId)){
+            Account acc=new Account(Id=c.AccountId);
+                    if(accCountMap.get(c.AccountId)>5){
+                        acc.Rating='Hot';
+                    }
+                    else if(accCountMap.get(c.AccountId)>2){
+                        acc.Rating='Warm';
+                    }
+                    else{
+                        acc.Rating='Cold';
+                    }
+                    accList.add(acc);
+                }
+            }
+            
+        }
+        if(!accList.isEmpty()){
+            update accList;
+        }
+    }
+}
+
+
+-----------------------------
+
+public class ContactTriggerHanlder {
+
+    public static void updateaccdes(List<Contact> conList){
+        Map<Id,Contact> conMap=new Map<Id,Contact>();
+        List<Account> accList=new List<Account>();
+       Map<String,Set<Id>> mapToavoidRecursion=new Map<String,set<id>>();
+      /*  if(!mapToavoidRecursion.containsKey('afterUpdate')){
+             mapToavoidRecursion.put('afterUpdate',new Set<Id>());
+        }*/
+        if(!conList.isEmpty()){
+            for(Contact con:conList){
+                if(con.Description!=null && con.AccountId!=null ){
+                    conMap.put(con.AccountId,con);
+                }
+            }
+        }
+        if(!conMap.isEmpty()){
+            Map<Id,Account> accMap=new Map<Id,Account>([Select id,Description from Account where Id In:conMap.keySet()]);
+            for(Contact con:conList){
+                Account acc=new Account(id=con.AccountId);
+                acc.Description=con.Description;
+                accList.add(acc);
+                
+            }
+        }
+        if(!accList.isEmpty()){
+            update accList;
+        }
+      /*  for(Contact con:conList){
+             mapToavoidRecursion.get('afterUpdate').add(con.Id);
+        }*/
+    }
+    
+    public static void countcounts(List<Contact> conList){
+        Set<Id> accIds=new Set<Id>();
+        Map<Id,Integer> conMap= new Map<Id,Integer>();
+        List<Account> accList=new List<Account>();
+        if(!conList.isEmpty()){
+            for(Contact con:conList){
+                accIds.add(con.AccountId);
+            }
+        }
+        if(!accIds.isEmpty()){
+            for(AggregateResult result:[Select AccountId,count(Id) totalContact from Contact where AccountId In:accIds group by AccountId]){
+                Id id=(ID) result.get('AccountId');
+                Integer totalCon=(Integer) result.get('totalContact');
+                conMap.put(id,totalCon);
+            }
+        }
+        if(!conMap.isEmpty()){
+            for(Contact con:conList){
+                Account acc=New Account(Id=con.AccountId);
+                acc.Description=String.valueOf(conMap.get(con.AccountId));
+                accList.add(acc);
+            }
+        }
+        if(!accList.isEmpty()){
+            update accList;
+        }
+        
+    }
+}
+
+
+---------------------
+
+public class AccountTriggerHandler {
+  public static void createRelatedContact(List<Account> accList,Map<Id,Account> oldMap) {
+       Set<Id> processedAccountIds = new Set<Id>();
+        List<Contact> conList = new List<Contact>();
+        for (Account acc : accList) {
+  if ((oldMap != null && acc.Active__c!=oldMap.get(acc.Id).Active__c && acc.Active__c == 'Yes' && !processedAccountIds.contains(acc.Id))
+    || (oldMap == null && acc.Active__c == 'Yes' && !processedAccountIds.contains(acc.Id))) {
+                Contact con = new Contact();
+                con.LastName = acc.Name != null ? acc.Name : 'DefaultLastName';
+                con.Phone = acc.Phone;
+                con.AccountId = acc.Id;
+                conList.add(con);
+                processedAccountIds.add(acc.Id);
+          }
+        }
+        if (!conList.isEmpty()) {
+           insert conList;
+        }
+    }
+}
+
+--------------------------------
+public class OpportunityTriggerHandler {
+
+    public static void changeowner(List<Opportunity> oppList,Map<Id,Opportunity> oldOppMap){
+        for(Opportunity opp:oppList){
+            String oldOppOwner=oldOppMap.get(opp.Id).OwnerId;
+            String newOppOwner=opp.OwnerId;
+            if(oldOppOwner.substring(0,3)=='00G' && newOppOwner.substring(0,3)!='00G'){
+                opp.stageName='Close won';
+            }
+        }
+    }
+    
+    public static void calculateAmount(List<Opportunity> oppList){
+        
+        Map<Id,Opportunity> oppMap=new Map<Id,Opportunity>();
+        Map<Id,Decimal> totalOppAmountMap=new Map<Id,Decimal>();
+        List<Account> accList=new List<account>();
+        if(!oppList.isEmpty()){
+            for(Opportunity opp:oppList){
+                if(opp.Amount!=null && opp.AccountId!=null){
+                    oppMap.put(opp.AccountId,opp);
+                }
+            }
+        }
+        if(!oppMap.isEmpty()){
+            for(AggregateResult result:[Select AccountId,sum(Amount) totalAmount from Opportunity where AccountId In:oppMap.keySet() group by AccountId]){
+               Id id=(Id) result.get('AccountId');
+                Decimal dec=(Decimal) result.get('totalAmount');
+                totalOppAmountMap.put(id,dec);
+                
+            }
+        }
+        if(!totalOppAmountMap.isEmpty()){
+            for(Opportunity opp:oppList){
+                 Account acc=new Account(Id=opp.AccountId);
+                 acc.Description=String.valueOf(totalOppAmountMap.get(opp.AccountId));      
+                accList.add(acc);
+            }
+        }
+        if(!accList.isEmpty()){
+            update accList;
+        }
+    }
+  
+}
+
+public class AccountTriggerHandler {
+    public static void checkRecordTypeLimits(List<Account> newAccounts) {
+        // Set to hold the record type ids that need to be checked
+        Set<Id> recordTypeIds = new Set<Id>();
+
+        // Collect record type ids from the new accounts
+        for (Account acc : newAccounts) {
+            recordTypeIds.add(acc.RecordTypeId);
+        }
+
+        // Query to get the count of accounts for each record type
+        List<AggregateResult> recordTypeCounts = [
+            SELECT RecordTypeId, COUNT(Id) count
+            FROM Account
+            WHERE RecordTypeId IN :recordTypeIds
+            GROUP BY RecordTypeId
+        ];
+
+        // Map to store the record type counts
+        Map<Id, Integer> recordTypeCountMap = new Map<Id, Integer>();
+
+        // Populate the map with the counts
+        for (AggregateResult ar : recordTypeCounts) {
+            recordTypeCountMap.put((Id)ar.get('RecordTypeId'), (Integer)ar.get('count'));
+        }
+
+        // Check if any record type has more than 2 records
+        for (Account acc : newAccounts) {
+            Integer currentCount = recordTypeCountMap.get(acc.RecordTypeId);
+            if (currentCount != null && currentCount >= 2) {
+                acc.addError('Cannot have more than 2 records for this record type.');
+            }
+        }
+    }
+}
+
+----------------------------------------
+public class AccountTriggerHandler {
+    public static void checkRecordTypeLimits(List<Account> newAccounts) {
+        // RecordTypeId values for "mobile" and "broadband"
+        Id mobileRecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByName().get('Mobile').getRecordTypeId();
+        Id broadbandRecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByName().get('Broadband').getRecordTypeId();
+        
+        // Initialize counters
+        Integer mobileCount = 0;
+        Integer broadbandCount = 0;
+
+        // Count existing records for each record type
+        List<AggregateResult> recordTypeCounts = [
+            SELECT RecordTypeId, COUNT(Id) count
+            FROM Account
+            WHERE RecordTypeId IN :new Set<Id>{mobileRecordTypeId, broadbandRecordTypeId}
+            GROUP BY RecordTypeId
+        ];
+
+        // Map to store the record type counts
+        Map<Id, Integer> recordTypeCountMap = new Map<Id, Integer>();
+
+        // Populate the map with the counts
+        for (AggregateResult ar : recordTypeCounts) {
+            Id recordTypeId = (Id) ar.get('RecordTypeId');
+            Integer count = (Integer) ar.get('count');
+            recordTypeCountMap.put(recordTypeId, count);
+        }
+
+        // Update counters with new records
+        for (Account acc : newAccounts) {
+            if (acc.RecordTypeId == mobileRecordTypeId) {
+                mobileCount++;
+            } else if (acc.RecordTypeId == broadbandRecordTypeId) {
+                broadbandCount++;
+            }
+        }
+
+        // Validate against the existing counts
+        for (Account acc : newAccounts) {
+            if (acc.RecordTypeId == mobileRecordTypeId && recordTypeCountMap.get(mobileRecordTypeId) + mobileCount > 2) {
+                acc.addError('Cannot have more than 2 Mobile records.');
+            } else if (acc.RecordTypeId == broadbandRecordTypeId && recordTypeCountMap.get(broadbandRecordTypeId) + broadbandCount > 2) {
+                acc.addError('Cannot have more than 2 Broadband records.');
+            }
+        }
+    }
+}
