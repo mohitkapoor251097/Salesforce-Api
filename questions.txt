@@ -1,0 +1,571 @@
+Salesforce Security model
+Sales cycle 
+Order of execution
+Syncronous/Asyncronous Apex
+with sharing without sharing in Apex
+Integration - asked to write basic pattern of external callout
+Connected App/ Named credentials
+LWC Lifecycle Hooks 
+LWC Decoraters 
+Ways to call apex controller into LWC
+Communication between related/non-related components
+How to call LWC component into screen flow and vice versa 
+
+write a soql get the account who don't have any opportunity
+write a code lets consider we have parent object A, B is the child of A & C child of B then make a Map<A,list<C>>
+Transcation Finalizers in Queuable
+how to share a record via apex sharing write a code for account share if owner changed then share record with previous owner
+write a class structure with methods for singleton pattern
+lets say we have too many old records need to archive it on external system how can you do that
+can lwc constructer contains any value or it is blank
+we have A-B-C component hierarchy then want to send data from C to A in lwc
+LWC lifecycle
+role hierachy sharing 
+Asycnhronus apex including batch, future
+promises in lwc
+callback hell in lwc
+explain about @wire, @trck
+how to show only few fields on lwc without using apex method call
+how to edit these fields 
+fetch related records withpout using apex method in lwc
+communitcation in lwc
+how you debug the lwc 
+how do you make the deployment
+have you worked on Mulesoft
+
+Which deployment tool have you used?
+Have you worked on ci/cd pipeline and explain the process of ci/cd
+Have you worked on Omni channel?
+Explain Entitlements in Service cloud
+Explain Case assignment rules
+Explain Case Escalation rule
+When an opportunity is created and assigned to someone after few days, the original owner should be still able to see record even though owd is private. Write a trigger for this problem statement
+Write a query to fetch contacts having gmail id
+Write a query to fetch no of contacts along with account name
+In how many ways we can share records in SF?
+Governor limits which you have come across and how you solved them?
+How to debug lwc?
+Can we catch exceptions? which exceptions we cant catch and why?
+What are promises in lwc?
+How to communicate between unrelated components in LWC?
+Explain Queueable apex. Also explain Transcation Finalizers .
+Explain different type of decorators in LWC
+How to use Platform events in a scenario where the event should be published after a delay
+What is getRecords? 
+In getRecords method if record id is changed what will happen?
+
+Decorators?
+How @api function will call in lwc?
+fetch accounts  where shipping country is equal to billing country
+fetch account where no contacts associated
+What is transaction finalizer ?
+Rest api inbound and outbound explanation?
+How many ways we can share a record?
+Component communication in lwc?
+Governor limits faced and how to resolve?
+trigger : if opportunity owner changed. Old owner can have the visibility the record eventhough owd is private?
+How to resolve too many soql 101 error?
+Explain real time scenario on promise function usescase in your project?
+If we didn’t decorate variable with decorator, what is behaviour?
+And what is diff between track decotaor varable and  normal variable in JS?
+What is diff between wire and imperative call?
+How to DMl using wire decorator?
+In lWc  JS,If record ID changed , how wire adaptor behaves? Is it pick new ID or not?
+Questions on batch apex? What is stateful?
+On UI there is form to fill the parameters. We have to fetch the data from database based on parameters. How you achieve using LWc?
+
+Introduce yourself
+Explain about the Service cloud process
+What are the difference between Rest and SOAP API
+What are the best Practices for the data migration
+What are the best Practices for Apex Classes
+What are the Rest API Outbound Steps
+How do you resolve the Issue when Client has Identified an error in Production on the task that you have worked.
+What is Two-Way Binding in LWC
+What is the difference between LWC and Aura Components
+How do you communicate between LWC Components
+What are the different development tools that you are aware
+What is record level security
+In role hirachy there is manager, lead and a developer and when Developer creates the records his manager and lead should not has access to those records how to achive this
+
+Introduce yourself
+Project related questions
+Many to many relationship - what happens if parent got deleted
+Senario related to apexsharing
+Get Data - map of grandparent and grand child using soql and apex code
+Trigger - before update context - explanantion
+Trigger - after update - performing update operations on same record (read only mode in triggers) - explanantion
+Trigger on senario where comes mixed dml exception - writting code
+Soql queries on - Date literals, Aggregation Functions, inline queries
+About communities and related to data security in communities (record sharing among cummunity users)
+Asynchronous methods in SF - explainig about each of them with limits
+Can we do asynchronous operations in record triggered flow in insert a record mode?
+Dynamic Forms in Admin 
+Custom settings and custom metadata differences and when to use when
+Integration - by using extenal objects use cases/senario 
+LWC - life cycle hooks, decorators (main differences bw each of them) and communication bw components
+Which is called first wire or ConectedCalBack?
+Handle errors in flows - record triggered flows & Screen flows
+About interfaces, extends use cases, override, custom exceptions, static keyword, implements keyword in Apex
+
+How to do callout using triger?
+Explain different types of async apex?
+ Explain singleton pattern in apex
+what is wrapper class?
+What is Promises ? Promise.race, promiseall
+ How to connect two salesforce org? integration between two orgs
+Difference between Authentication and authorization?
+Async Await in javascript.
+ How to resolve merge conflict?
+Which is the lifecycle hook in LWC which can be called more than once? And what issue can it create?
+" Write a trigger for  : There is a custom object called ‘Position__c’ which has 2 fields on it.
+User - lookup to User
+IsActive - checkbox
+At one point of time there is no more than one active position related to User."
+How to access List<Contacts> in: Map<String,Map<String,Map<String,List<Contact>>>> mapOfAllCOntacts
+OWD for contact is read only,  and we have 20 contacts but user are able to view only 19 why?
+Why do we use getters and setters in LWC?
+How to automate lead conversion process?
+
+Write a Apex code to send email alerts to the account owner when ever account status got updated
+Order of execution
+Wrapper class
+What is abstract class ?
+Types of flows in salesforce?
+What are some commoc challenges faced during salesforce implemantation and how can they be mitigated ?
+How do you handle data retrieval and manipulation in lwc ?
+How can we communicate from grand child to parent?
+Life cycle hooks of lwc?
+Different types of Decorators?
+Explian the concept of wire adaptors in lwc and examples?
+Describe the difference between workflow rule and process builder?
+Explain the lifecycle hooks in lwc ?
+Explain the sharing model in the salesforce?
+
+
+Sales cycle, lead conversion process - out of the box and programmatically 
+Lead generation process, project experience
+sharing settings scenario in Salesforce
+Difference between future, queuable and batch class
+How to do callout using trigger? What are the different Trigger frameworks
+How to communicate from parent to child and vice versa? What are custom events?
+LWC life cycle hooks and decorators?
+pubsub module and LMS
+How to select all fields from Account and related objects using SOQL?
+How to pass value from Apex method to lwc using wire
+what are integration patterns in salesforce with examples?
+Any CI-CD tool used for deployment?
+What is static code analysis in Copado(since I mentioned it)
+Give some examples of exceptions and how you handled them
+different type of flows in salesforce, why do we use platform event triggered flows?
+
+Introduce yourself
+Questions on experience cloud since I worked on it
+what is the piece of code which needs to be eexcuted no matter what the promise returns 
+how do I autofill the records data on click of quick action
+how do you fetch the particular record in lwc
+some admin question related to owd 
+write a soql query fetch contacts belongs to same acct --> amount on contact sum of it contacts should be type = Manual 
+write a  soql query all accounts which does  not have opp 
+when does the api decorator gets the value on the lifecycle hook
+what is the standard api used in integration 
+when does wire gets the value in the lifecycle hooks 
+how do you communicate between two unrelated components added to the record page 
+say if there a b c components and if c is firing the event and is recieved in b how do you make sure that it is not fired to a 
+why do we use track even though api is reactive 
+how do you debug in lwc apart from console logs,debug logs 
+how to update the same record in the after context any workaround?
+what is an interface and abstract class
+can we use static keyword in the class definition ? it's done in java
+trigger framework used in project? 
+questions regarding deployment tools not about git and ant migration tool , some other deployment tool
+how do you make flow work in asyncrnous mode 
+map of GrandParent and children writing apex code
+how do you do data migration to production
+how do show the error message without using screen element just like add error method in flows? 
+any singleton pattern used in the project
+
+"Configuration Part:
+Implicit & Explicit Sharing
+Security Model Explanation (Object and Data)
+Apex Sharing
+Junction Objects and their use
+Controlled by Parent meaning in Sharing
+Types of Flows in Salesforce
+
+Apex -
+Trigger Frameworks*
+Trigger Context Variables and their uses
+Collections in Apex - their uses and Map functions
+Types of Triggers and when to use what trigger
+Apex Design Patterns*
+Best Practises while writing Test Classes
+Asynchronous Apex and their Governor Limits
+Future, Queueable, Batch Apex - Full explanation with syntax and their uses
+Governor Limits Explaination 
+
+LWC - 
+Decorators and their uses
+Component Communication i.e., from Parent to Child, Child to Parent and Sibling Components
+Callback hell and how to avoid this
+LWC lifecycle hooks
+
+Integration - 
+Integration design patterns*
+REST Api code explanation and RestResource code explanation
+Difference between REST and SOAP Api"
+Introduce yourself/project related questions
+regarding deployment tool have you used?
+questions on experience cloud since i worked on it
+salesforce security model
+different type of flows in salesforce, why do we use platform event triggered flows?
+Asycnhronus apex including batch, future
+with sharing without sharing in Apex
+In how many ways we can share records in SF?
+difference between static and dynamic dashboards
+different types of apex triggers in salesforce
+trigger framework used in project?
+is it possible to use formula field in rollup summary calculation which is referring to another object?
+DML operations can be done using process builder?
+process builder Vs Apex trigger
+schdule apex/how can we schedule a batch apex
+can we make callouts from batch apex?if yes,how?
+best practices while writing test classes
+Soql queries on-data literals,aggregation functions,inline queries
+map of GrandParent and children writing apex code
+
+Write SOQL query for Account , Contact , Opportunity
+Apex trigger code for after insert and after update scenario
+Name governer limits excepts heap size and 101 SOQL query
+Limitaion of future methods and calls
+Lightning flows components
+Lightning Web Component life cycle hooks
+LWC calls P2C & C2P
+How to call Apex methods for LWC
+notations for method to be used in LWC
+Test class writing best practices
+Apex coding best practices
+Explain Sales process 
+Lead conversion process
+Lead conversion via code
+explain system.runAs()
+Sharing setting : Record sharing within a team what could be the implementation for sharing 
+
+Introduce yourself/project related questions
+salesforce security model
+different type of flows in salesforce, why do we use platform event triggered flows?
+with sharing without sharing in Apex
+is it possible to use formula field in rollup summary calculation which is referring to another object?
+How to call Apex methods for LWC
+best practices while writing test classes
+can we make callouts from batch apex?if yes,how?
+map of GrandParent and children writing apex code
+Apex design pattrens
+Lifecycle hooks  & explanation
+how do show the error message without using screen element just like add error method in flows? 
+Different types of Decorators?
+why do we use track even though api is reactive 
+How to communicate from parent to child and vice versa? What are custom events?
+Can we do asynchronous operations in record triggered flow in insert a record mode?
+Trigger Context Variables and their uses
+Integration design patterns
+REST Api code explanation and RestResource code explanation
+Difference between REST and SOAP Api
+what is the standard api used in integration 
+explain about @wire, @trck
+Order of execution
+Communication between related/non-related components
+How to call LWC component into screen flow and vice versa 
+
+How to implement Lms & child to parent communication in LWC
+How can we do query optimisation in salesforce
+What is data skew
+while changing the owner the access is getting lost so what could we do 
+Making a call out from trigger what error can we get 
+What is skinny table 
+in a record triggered flow we are using async operation what will happen will it work?
+diff b/w git pull and git fetch 
+what are escalation rules
+How to do Einstein bot setup 
+trigger on contact to get the number of associated contacts on account
+if we have one sub query will it count against limit of total SOQL queries.
+
+Write a apex method to find square root of a number without using Math class
+"There is a Long Text Area field on product named ""JSONAttr"". Write a method that will accept the field value and extract the SelectedValue.
+{
+attributes: {
+--
+--
+RunTimeValue: {
+""$STARTNODE$"":"""",
+SelectedValue : """",
+""$ENDNODE$"":""""
+}
+
+}
+
+}"
+
+Have you worked on Platform Cache? What are the different types of platform cache available in Salesforce?
+SELECT Id, (SELECT Id FROM Contacts) FROM Account - How many SOQL statements are used?
+Is it possible to deploy a class with 0% code coverage in prod if the overall coverage is above 75%? How much of code coverage is required to deploy a trigger?
+
+Write an apex trigger to update Total_Amount__c field in Invoice__c from the related Invoice_Line_Items__c
+There are open jobs and candidates. Suggest a data model to map candidates to the open jobs. What would be the relationship between Job and Candidate object?
+What is transaction finalizer?
+
+
+Introduce yourself and your Salesforce experience
+What are the sharing settings available in SFDC?
+Write JS code to sort an array of numbers in ascending order.
+Explain Lifecycle hooks in LWC with its usecases.
+What is LMS and how is it used?
+Write an Apex Trigger to update the no. of Contacts on Account.
+What is Dynamic forms?
+Can we add visibility criteria for Sections in Dynamic forms?
+What was the toughest challenge you faced in your career?
+Explain types of async apex.
+Can we call future method from Batch class?
+How many batches can run at a time?
+Best practices for Apex
+Explain any Apex trigger framework you use.
+Explain custom events in Aura framework.
+Explain decorators in lwc.
+What is Platform Events and how it works.
+
+Junction object and its characteristics.(some scenario based questions related to same)
+Dynamic form (field has all level access but still its not visible to end user)
+Sharing rule, Manual sharing (What will happens when records owner gets deleted)
+Can we do Asynchronous operation in Record trigger flow in Insert mode.
+"About apex based sharing rule
+  a.what will happens with shared records and recieving user when record owner gets changed in standard object."
+Rollup summary trigger
+show toast event in LWC & how you achieved it.
+Navigation in LWC & how you achieved it.
+Lightning messaging service in LWC
+"Communication between grandparent and Child
+what is bubble and composed?"
+Git, version control, branching strategies
+Order of execution in salesforce (between Before record trigger flow & Custom validation)
+What is multitenant architecture and its advantages
+
+1. How to get database.insert behave same as insert. And what is the default mode.
+2. Write an soql query to fetch the account in which opportunities are open(stage name).
+3. Write an soql query to fetch the account and opty details where the sum of opty greater than 10 and only frt 5 records of the query
+4. Why we have future method though we have queueable.
+5. Write a trigger to calculate the age of a user, when they fill dob. Also once dob is filled user shld not be able to edit it again. Write trigger with all the best practices and trigger framework u know
+6. Scenario on certain event happening in external system, the field on the account shld get updated and a existing class shld be scheduled.. this shld be done only by point and click tools
+7. On web to lead, I hav a trigger on lead and a handler class for the trigger whr the user is not having access to Salesforce. What will happen in this case.. 
+8. Some Lwc question.
+9. Why we don't have queue options enabled in sharing rules whr we have roles and group
+Lwc 
+1. Order of execution in lwc 
+2. How to communicate between two components in lwc which are not in hirerchy and not in via LMS.
+3. How to chain two wire methods.
+4. How to chain wire and imperative
+
+1.Write a Trigger to do rollup on Account from related Contact
+2.Question on Batch,Future,Queueable
+3.Integration Procedure
+LWC
+1.Life Cycle Hook
+2.Communication between related and unrelated components
+3.How to implement search functionality in controller of LWC
+4.Decorators and its use case
+1.Differences between declarative and programmatic customizations?
+2. Are the Trigger are more effective then Flows?
+3. Show toast event in LWC & how is it  achieved ? 
+4. Restrict Emails Sent from Unverified Email Addresses by the Guest User
+
+Explain about past projects
+diffrence between LWC and Aura
+explain pub/sub in lwc & asked to write code for using pubsub
+get data from apex method into lwc using wire & write syntax
+what challenges you faced while using Flows
+Explain different governer limits 
+write a query to get data from Contact, Opportunity & account
+Explain a challenging situation you faced & how you reolved it while doing development in past
+Refresh Apex in lwc
+decoraters in lwc & why we still use @track
+with sharing, without sharing
+write a trigger code : if phone number field of Account changed then only it should update the related contact records with same phone number. 
+which CICD tools you used for deployment
+Best practices while writing apex code
+how to resolve CPU timeout error & Heap size issue
+best practices of writing lwc
+advantages of using SOQL for loop
+how you handle exception thrown from apex to lwc
+
+
+
+write a soql get the account who don't have any opportunity
+write a code lets consider we have parent object A, B is the child of A & C child of B then make a Map<A,list<C>>
+Transcation Finalizers in Queuable
+how to share a record via apex sharing write a code for account share if owner changed then share record with previous owner
+write a class structure with methods for singleton pattern
+lets say we have too many old records need to archive it on external system how can you do that
+can lwc constructer contains any value or it is blank
+we have A-B-C component hierarchy then want to send data from C to A in lwc
+LWC lifecycle
+role hierachy sharing 
+Asycnhronus apex including batch, future
+promises in lwc
+callback hell in lwc
+explain about @wire, @trck
+how to show only few fields on lwc without using apex method call
+how to edit these fields 
+fetch related records withpout using apex method in lwc
+communitcation in lwc
+how you debug the lwc 
+how do you make the deployment
+have you worked on Mulesoft
+
+Introduce yourself
+Project related questions
+Many to many relationship - what happens if parent got deleted
+Senario related to apexsharing
+Get Data - map of grandparent and grand child using soql and apex code
+Trigger - before update context - explanantion
+Trigger - after update - performing update operations on same record (read only mode in triggers) - explanantion
+Trigger on senario where comes mixed dml exception - writting code
+Soql queries on - Date literals, Aggregation Functions, inline queries
+About communities and related to data security in communities (record sharing among cummunity users)
+Asynchronous methods in SF - explainig about each of them with limits
+Can we do asynchronous operations in record triggered flow in insert a record mode?
+Dynamic Forms in Admin 
+Custom settings and custom metadata differences and when to use when
+Integration - by using extenal objects use cases/senario 
+LWC - life cycle hooks, decorators (main differences bw each of them) and communication bw components
+Which is called first wire or ConectedCalBack?
+Handle errors in flows - record triggered flows & Screen flows
+About interfaces, extends use cases, override, custom exceptions, static keyword, implements keyword in Apex
+
+Introduce yourself
+Questions on experience cloud since I worked on it
+what is the piece of code which needs to be eexcuted no matter what the promise returns 
+how do I autofill the records data on click of quick action
+how do you fetch the particular record in lwc
+some admin question related to owd 
+write a soql query fetch contacts belongs to same acct --> amount on contact sum of it contacts should be type = Manual 
+write a  soql query all accounts which does  not have opp 
+when does the api decorator gets the value on the lifecycle hook
+what is the standard api used in integration 
+when does wire gets the value in the lifecycle hooks 
+how do you communicate between two unrelated components added to the record page 
+say if there a b c components and if c is firing the event and is recieved in b how do you make sure that it is not fired to a 
+why do we use track even though api is reactive 
+how do you debug in lwc apart from console logs,debug logs 
+how to update the same record in the after context any workaround?
+what is an interface and abstract class
+can we use static keyword in the class definition ? it's done in java
+trigger framework used in project? 
+questions regarding deployment tools not about git and ant migration tool , some other deployment tool
+how do you make flow work in asyncrnous mode 
+map of GrandParent and children writing apex code
+how do you do data migration to production
+how do show the error message without using screen element just like add error method in flows? 
+any singleton pattern used in the project
+
+
+
+Which deployment tool have you used?
+Have you worked on ci/cd pipeline and explain the process of ci/cd
+Have you worked on Omni channel?
+Explain Entitlements in Service cloud
+Explain Case assignment rules
+Explain Case Escalation rule
+When an opportunity is created and assigned to someone after few days, the original owner should be still able to see record even though owd is private. Write a trigger for this problem statement
+Write a query to fetch contacts having gmail id
+Write a query to fetch no of contacts along with account name
+In how many ways we can share records in SF?
+Governor limits which you have come across and how you solved them?
+How to debug lwc?
+Can we catch exceptions? which exceptions we cant catch and why?
+What are promises in lwc?
+How to communicate between unrelated components in LWC?
+Explain Queueable apex. Also explain Transcation Finalizers .
+Explain different type of decorators in LWC
+How to use Platform events in a scenario where the event should be published after a delay
+What is getRecords? 
+In getRecords method if record id is changed what will happen?
+
+Explain different deployments process used
+Explain about Omnichannels in service cloud , Its different ways of routing
+In detail asked to explain about use cases when do u go with Queue based and Skill based Routing
+explain about record level sharing in salesforce
+Asked few scenario based Question on record level sharing
+Apex best practices
+How do u make a private method visible for test class
+Write a SOSL to search a name in Account , Contact and Opportunity
+when do we go with before trigger and after trigger, Not asked to write a trigger
+How do u avoid cpu time limit exception
+How do you avoid recursion in trigger
+Lwc life cycle hooks
+Wire method limitations in lwc
+How do u aviod mixed dml in salesforce
+Limitations of future methods, How to overcome this
+Explain Trigger frameworks in salesforce
+Explain Event Propagation in LWC 
+Explain in detail about Bubble and composed in lwc
+Async await vs promises in Javascript
+
+
+Introduce yourself
+Rate yourself in APEX, LWC and Integration
+We want to call an external service and OAuth flow used is user name and password flow. Explain how do you start and complete this Integration
+What kind of parameters we can pass to future methods ? Explain why future method doesn't allow non primitive params
+Did you work on any Type Class in Apex ?  Explain 
+What are the different kind of sharing mode available in apex ? Explain Inherited Sharing mode
+A Class is running in without sharing mode how do you ensure that user level permissions are applied to SOQL and DML 
+Can we call LWC from flow ? how ?
+life cycle hooks and order of execution in related components
+Scenario based questions on meta xml config --> targets, target configs, property
+there is a extenal js file I'm trying to load in my lwc but I'm getting undefined error. how do you resolve it ?
+Communication between related/non-related components in LWC
+Explain the CICD pipeline you used in your project 
+What is the git command to fetch all the branches from the git
+have you created pull requests? how to you resolve the merge conflicts during deployment
+apart from git what other deployment tools you have used
+Write a trigger, when a Contact is getting created we need to find out an Account matching with the Email field, if Account found in the system, link the Contact to that Account else create an Account and link the Contact to that Account? - make sure to follow the code best practices
+Write a SOQL query to fetch all the opportunities associated to accounts having sum of all the opp Amount is > 20000
+
+
+
+
+
+Design factor of Apex
+what is auth 2.0 ?
+what is workflow of auth 2.0
+what is rolllup summary fields?
+How many rollup fields created max on object?
+Limit of master detail relationship.?
+lookup realtionship limits.?
+what are the promisses in JS.?
+Difference between Promiss.all and Promiss.allsettled?
+Async and await when and where to use ?
+how we call lwc component method from aura Component?
+
+Explain the entire working of sales cloud, how would you set it up for a new org for their sales, marketing team, etc
+What are the possible ways to giver access to records amongst users in salesforce. 
+If there are two users A and B having same profile, B can access records of A but A cant access records of B what is the possible reason ?
+A user has all CRED access to object and OWD is public read/write, why do we get error on delete when we try to delete records of other user
+Explain lead escalation rules
+What are the limitations of Guest user profile of experience cloud
+Write a parent to child and child to parent SOQL query
+Exibhit Aliasing on SOQL queries
+What is MixedDML exception and how to resolve it.
+Quetions on future method, possiblle scenarios, function parameters. 
+Difference between flow and apex triggers, when to use which and order of execution
+How to retrieve and show large number of records more than 50K+ on LWC
+While performing upsert certain records in a list is getting bypassed in a flow, what could be the possible reason ?
+How to prevent recursions in trigger?
+In Batch class , how do we keep track of records processed and send email?
+When do we encounter uncommitted work pending and how to resolve it. 
+Latest updates on SOQL query and flows.
+How to communicate between lwc components, related and un related
+Can a child component communicate with its grand parent directly in lwc?
+How to make lwc component visible in apps, record pages, etc
+What is  lwc:ref and how it is better than querySelector?
+What was the latest update on Database.query()
+Lifecycle hooks of LWC
+In Javascript how will you filter an array of objects based on certain criteria?
