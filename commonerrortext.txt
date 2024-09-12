@@ -1,0 +1,17 @@
+ Common Apex Errors and Solutions:
+
+1. Null Pointer Exception: Occurs when trying to access or modify a null object or variable. Always check for null before accessing. Example: if (myObject != null) { // Safe to access myObject }
+
+2. SOQL Query Limit Exceeded: Description includes exceeding the maximum number of queries allowed in a transaction. Optimize queries by combining them efficiently.
+
+3. Too Many DML Statements: Exceeds the maximum number of DML statements allowed in a transaction. Batch DML operations and use collections for bulk updates.
+
+4. Heap Size Too Large: Description notes exceeding the maximum heap size limit. Optimize memory usage by fetching only necessary data.
+
+5. CPU Time Limit Exceeded: Exceeding the maximum CPU time allowed for a transaction. Optimize code to reduce processing time and use asynchronous processing where possible.
+
+6. Mixed DML Operation: Occurs when performing DML operations on setup and non-setup objects in the same transaction. Separate DML operations into different transactions or use asynchronous methods.
+
+7. Field Integrity Exception: Happens when a field value does not meet the field’s data type or constraints. Validate field values before DML operations.
+
+8. Unhandled Exception: Occurs when an exception is not caught and handled in the code. Utilize try-catch blocks to handle exceptions gracefully.
