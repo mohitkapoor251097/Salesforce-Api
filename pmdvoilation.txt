@@ -1,0 +1,30 @@
+C:\Users\mohit.kapoor\Documents\r89clone1\Ofcom-Salesforce\force-app\main\default\classes\CaseTriggerHandler.cls
+
+
+sfdx scanner:run --target=C:\Users\mohit.kapoor\Documents\r89clone1\Ofcom-Salesforce\force-app\main\default\classes\CaseTriggerHandler.cls --outfile=CaseTriggerHandler.csv --format=csv --severity-threshold 3 --engine 'pmd'
+
+
+ public static void calculateTargetDate(Case caseObj){
+        Id informationRequestRecTypeId = utl_RecordTypes.getInstance().getRecordTypeIdByDeveloperName('CASE.Information_Request'); 
+        final Integer maxDaysPerCycle = 20;
+        final Long millisecondsInOneDay = 24 * 3600 * 1000;
+        Long intervalMilliseconds;
+        
+          if (caseObj.RecordTypeId == informationRequestRecTypeId && caseObj.Type != null) {
+        SLA_Duration_For_Classification__c slaDuration = SLA_Duration_For_Classification__c.getValues(caseObj.Type);
+        Integer slaDays = Integer.valueOf(slaDuration.Quantity__c);
+        if (slaDuration != null && caseObj.BusinessHoursId != null && caseObj.AccountId != null) {
+            DateTime slaStartDate = caseObj.SlaStartDate;
+            // First addition to calculate revised due date
+              DateTime revisedDueDate = (caseObj.SlaStartDate != null)?caseObj.SlaStartDate:system.now();
+            // Handle cases where SLA days exceed 20
+            while (slaDays > 0) {
+                intervalMilliseconds = Math.min(slaDays, maxDaysPerCycle) * millisecondsInOneDay;
+                revisedDueDate = BusinessHours.add(caseObj.BusinessHoursId, revisedDueDate, intervalMilliseconds);
+                slaDays -= maxDaysPerCycle;
+            }
+            // Update the case with the final revised due date
+            caseObj.Revised_Due_Date__c = revisedDueDate;
+        }
+    }
+    }
