@@ -1,0 +1,28 @@
+Latest Salesforce Interview Questions 💯 hashtag#Salesforce
+
+1. What is the difference between for:each and iterator in Lightning Web Components (LWC)?
+2. Provide a code example to demonstrate bubble and capture phases in JavaScript.
+3. How do you implement Lightning Message Service (LMS) with an example?
+4. What is Lightning Data Service (LDS), and how is it used?
+5. How can you bypass a validation rule in Salesforce?
+6. In what context is manual sharing enabled in Salesforce?
+7. Can a user delete records created by someone in the same role?
+8. What is the difference between User Mode and System Mode in Salesforce?
+9. What are decorators in LWC, and how are they used?
+10. How many ways can records be shared in Salesforce?
+11. Can we call a Batch Apex class from a future method? If not, why?
+12. Can callouts be made from a trigger? Why or why not?
+13. Can we implement both Scheduled Apex and Batch Apex in a single Apex class? What is the best practice?
+14. Can we make callouts from Batch Apex?
+15. What are lifecycle hooks in Lightning Web Components?
+16. Which executes first: decorators or lifecycle hooks?
+17. What are the advantages and limitations of Lightning Data Service (LDS)?
+18. How would you implement a rule where an Account's phone cannot match a Contact's phone?
+19. What is the relationship between Account and Contact in Salesforce?
+20. Can we create a roll-up summary field for Contact on Account? Is it possible through standard functionality? If not, how would you implement it?
+21. When an Opportunity is marked as "Closed Won," how can you make the Opportunity and its Opportunity Products read-only?
+22. How can you communicate from a child component to a parent component in LWC? And vice versa?
+23. How can two independent LWC components communicate with each other?
+24. If a Batch Apex processes 2000 records with a scope of 200, how many debug logs will be generated?
+25. Have you worked on any deployment tools? If yes, which ones?
+26. What is the difference between with sharing and without sharing in Salesforce Apex?
