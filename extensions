@@ -24,7 +24,7 @@ salesforce package.xml generator extension
 slds validator
 
 
-
+SFDX Delta Plugin (sfdx plugins:install sfdx-git-delta) 
 v57.10.2: cli
 
 
