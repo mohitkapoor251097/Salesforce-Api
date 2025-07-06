@@ -1,0 +1,61 @@
+Hours_Transmitted_Required_In_Non_Leap
+
+AND(ISPICKVAL(Return_Schedule__r.Status__c, 'Submitted to Certify'),
+NOT(
+(
+MOD(VALUE(TEXT(Return_Schedule__r.Return_Period_Year__c)), 4) == 0
+
+&&
+(
+MOD(VALUE(TEXT(Return_Schedule__r.Return_Period_Year__c)), 100) != 0
+
+||
+MOD(VALUE(TEXT(Return_Schedule__r.Return_Period_Year__c)), 400) == 0
+
+)
+)),
+ISBLANK( Total_hours_broadcast_including_repeats__c)
+|| Total_hours_broadcast_including_repeats__c > 8760
+|| Total_hours_broadcast_including_repeats__c < 0
+|| ISBLANK( First_Run_Acquired__c)
+|| First_Run_Acquired__c > 8760
+|| First_Run_Acquired__c < 0
+|| ISBLANK( First_Run_Commissioned_UK__c)
+|| First_Run_Commissioned_UK__c > 8760
+|| First_Run_Commissioned_UK__c < 0
+|| ISBLANK( First_Run_UK_Originations__c)
+|| First_Run_UK_Originations__c > 8760
+|| First_Run_UK_Originations__c < 0
+)
+
+Please provide hours data, in numeric values up to a maximum of 8760 (or 8784 in a leap year). If no hours were broadcast in a category, this should be indicated with a 0 (zero).
+
+------------------
+Total_Hours_Including_Repeats_Exceeded
+
+AND(ISPICKVAL(Return_Schedule__r.Status__c, 'Submitted to Certify'),
+(
+
+MOD(VALUE(TEXT(Return_Schedule__r.Return_Period_Year__c)), 4) == 0
+&&
+(
+MOD(VALUE(TEXT(Return_Schedule__r.Return_Period_Year__c)), 100) != 0
+||
+MOD(VALUE(TEXT(Return_Schedule__r.Return_Period_Year__c)), 400) == 0
+)
+),
+ISBLANK( Total_hours_broadcast_including_repeats__c)
+|| Total_hours_broadcast_including_repeats__c > 8784
+|| Total_hours_broadcast_including_repeats__c < 0
+|| ISBLANK( First_Run_Acquired__c)
+|| First_Run_Acquired__c > 8784
+|| First_Run_Acquired__c < 0
+|| ISBLANK( First_Run_Commissioned_UK__c)
+|| First_Run_Commissioned_UK__c > 8784
+|| First_Run_Commissioned_UK__c < 0
+|| ISBLANK( First_Run_UK_Originations__c)
+|| First_Run_UK_Originations__c > 8784
+|| First_Run_UK_Originations__c < 0
+)
+
+Please provide hours data, in numeric values up to a maximum of 8760 (or 8784 in a leap year). If no hours were broadcast in a category, this should be indicated with a 0 (zero).
