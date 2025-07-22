@@ -26,7 +26,8 @@ slds validator
 
 SFDX Delta Plugin (sfdx plugins:install sfdx-git-delta) 
 v57.10.2: cli
-
+git config --global user.name "John Doe"
+git config --global user.email "john.doe@example.com"
 
 JSON formatter
 json viewer
